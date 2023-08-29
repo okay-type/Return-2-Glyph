@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<plist version="1.1">
 <dict>
 	<key>addToMenu</key>
 	<array/>
@@ -13,14 +13,16 @@
 	<key>launchAtStartUp</key>
 	<integer>1</integer>
 	<key>mainScript</key>
-	<string>Previous_CurrentGlyph.py</string>
+	<string>Return_to_Glyph.py</string>
 	<key>name</key>
-	<string>Previous Current Glyph</string>
+	<string>Return to Glyph</string>
 	<key>requiresVersionMajor</key>
 	<string>4</string>
+	<key>requiresVersionMinor</key>
+	<string>4b</string>
 	<key>timeStamp</key>
-	<real>1693257507.5095239</real>
+	<real>1693257507.5095240</real>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.1</string>
 </dict>
 </plist>
