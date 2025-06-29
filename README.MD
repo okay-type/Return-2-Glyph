@@ -1,14 +1,9 @@
-# Return to Glyph
+# Return 2 Glyph
 
 - Return to the previous CurrentGlyph using ⇧+,
 - Return to a history of previous CurrentGlyphs using the Robofont > Glyph menu
 - Go to related glyphs using the Robofont > Glyph menu
-- Probably requires Robofont version 4.4b 
-
-
-![Menu Screenshot: Return to previous glyph](resources/Screenshot 2025-06-29 at 5.56.20 PM.png)
-![Menu Screenshot: Return to previous glyph history](resources/Screenshot 2025-06-29 at 5.56.18 PM.png)
-![Menu Screenshot: Go to related glyphs](resources/Screenshot 2025-06-29 at 5.56.15 PM.png)
+- Probably requires Robofont version 4.4b
 
 ### What's New : Version 1.2
 
@@ -20,9 +15,15 @@
    - glyphs that use the current glyph's components as a component ('family')
    - each group separated by a line to help give some kind of order
 
+### Screenshots are nice
+
+![Menu - Return to previous glyph](resources/Screenshot0.png)
+![Menu - Return to previous glyph history](resources/Screenshot1.png)
+![Menu - Go to related glyphs](resources/Screenshot2.png)
+
 ### Questions for the future
 
-- is the related glyphs feature too heavy? 
+- is the related glyphs feature too heavy?
 - should this be a glyph window contextual menu instead of a main application menu?
 - should there be ui to view and pick from history & related glyphs?
 - how do I show the ⇧+, keyboard shortcut next to the "Return to ..." menu item.
