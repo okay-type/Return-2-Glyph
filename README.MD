@@ -21,8 +21,6 @@
 <img src="resources/Screenshot1.png" width="339" />
 <img src="resources/Screenshot2.png" width="418" />
 
-<img src="https://user-images.githubusercontent.com/link-to-your-image.png" width="200" />
-
 ### Questions for the future
 
 - is the related glyphs feature too heavy?
