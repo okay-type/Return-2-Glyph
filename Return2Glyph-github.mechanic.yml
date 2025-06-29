@@ -1,0 +1,10 @@
+description: Return 2 Glyph
+developer: Jackson Showalter-Cavanaugh
+developerURL: http://okaytype.com
+extensionName: Return 2 Glyph
+extensionPath: Return2Glyph.roboFontExt
+repository: http://github.com/okay-type/Return-2-Glyph
+icon: https://raw.githubusercontent.com/okay-type/Return-2-Glyph/master/Return2GlyphIcon.png
+infoPath: https://raw.githubusercontent.com/okay-type/Return-2-Glyph/HEAD/info.yaml
+zipPath: https://github.com/okay-type/Return-2-Glyph/releases/latest/download/Return2Glyph.roboFontExt.zip
+tags: [ menu ]

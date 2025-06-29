@@ -1,52 +1,40 @@
 # Return to Glyph
----
 
-- Remember your most recent CurrentGlyphs
-- Return to the previous CurrentGlyphs using ⇧+,
-- Use the Glyph menu to jump back in your recent CurrentGlyph history
-- Currently requires Robofont Version 4.4b (build 2308291143) from August 29, 2023
+- Return to the previous CurrentGlyph using ⇧+,
+- Return to a history of previous CurrentGlyphs using the Robofont > Glyph menu
+- Go to related glyphs using the Robofont > Glyph menu
+- Probably requires Robofont version 4.4b 
 
----
 
-### Version 1.1
+![Menu Screenshot: Return to previous glyph](resources/Screenshot 2025-06-29 at 5.56.20 PM.png)
+![Menu Screenshot: Return to previous glyph history](resources/Screenshot 2025-06-29 at 5.56.18 PM.png)
+![Menu Screenshot: Go to related glyphs](resources/Screenshot 2025-06-29 at 5.56.15 PM.png)
+
+### What's New : Version 1.2
+
+ - menu is built better (no more placeholders!)
+ - new menu icons
+ - added "related glyphs" menu that lists
+   - components used in the current glyph
+   - glyphs that use this current glyph as a component ("dependents")
+   - glyphs that use the current glyph's components as a component ('family')
+   - each group separated by a line to help give some kind of order
+
+### Questions for the future
+
+- is the related glyphs feature too heavy? 
+- should this be a glyph window contextual menu instead of a main application menu?
+- should there be ui to view and pick from history & related glyphs?
+- how do I show the ⇧+, keyboard shortcut next to the "Return to ..." menu item.
+- should this have a customizeable shortcut? I use ⇧+, because Fontlab ruined my brain. Young bucks might find ⇧+⌘+( more intuative.
+
+### History
+
+**Version 1.1**
 
 - Improved Glyph menu items
 - Added SF symbol icons to menu items for kicks
 - Got the history working (with some minor issues)
-
- ```
-    Glyph
-        Next Glyph
-        Previous Glyph
-        -------------------------------------
-        <  Return to *glyphname 0*       ⇧+,
-        << Return to History              >
-                *glyphname 1*
-                *glyphname 2*
-                *glyphname 3*
-                *glyphname 4*
-                *glyphname 5*
-                *glyphname 6*
-                *glyphname 7*
-                *glyphname 8*
-                *glyphname 9*
-        -------------------------------------
-```
-
-
----
-
-### Needed Improvements
-
-- The Return to History submenu starts with a bunch of blank "glyphname" items because if I add them later, they are disabled (bug?).
-- Figure out how to show the ⇧+, keyboard shortcut next to the "Return to *glyphname 0*" menu item.
-- Customizeable shortcut? I use ⇧+, because Fontlab ruined my brain and I use , to go back to the previous glyph. Young bucks might find ⇧+⌘+( more intuative.
-
-
----
-
-
-### Previous Versions
 
 **Version 1.0**
 

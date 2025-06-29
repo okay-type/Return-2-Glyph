@@ -1,0 +1,12 @@
+name: Glyphview Metrics
+developer: Jackson Showalter-Cavanaugh
+developerURL: http://okaytype.com
+launchAtStartUp: true
+mainScript: Return_2_Glyph.py
+version: 1.2.0
+addToMenu: []
+html: false
+requiresVersionMajor: '4'
+requiresVersionMinor: '4'
+
+
