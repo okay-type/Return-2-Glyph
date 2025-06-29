@@ -17,9 +17,9 @@
 
 ### Screenshots are nice
 
-![Menu - Return to previous glyph](resources/Screenshot0.png)
-![Menu - Return to previous glyph history](resources/Screenshot1.png)
-![Menu - Go to related glyphs](resources/Screenshot2.png)
+![Menu - Return to previous glyph](resources/Screenshot0.png =x304)
+![Menu - Return to previous glyph history](resources/Screenshot1.png =x339)
+![Menu - Go to related glyphs](resources/Screenshot2.png =x418)
 
 ### Questions for the future
 
