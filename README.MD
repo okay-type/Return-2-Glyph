@@ -17,9 +17,11 @@
 
 ### Screenshots are nice
 
-![Menu - Return to previous glyph](resources/Screenshot0.png =x304)
-![Menu - Return to previous glyph history](resources/Screenshot1.png =x339)
-![Menu - Go to related glyphs](resources/Screenshot2.png =x418)
+<img src="resources/Screenshot0.png" width="304" />
+<img src="resources/Screenshot1.png" width="339" />
+<img src="resources/Screenshot2.png" width="418" />
+
+<img src="https://user-images.githubusercontent.com/link-to-your-image.png" width="200" />
 
 ### Questions for the future
 
