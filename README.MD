@@ -5,15 +5,10 @@
 - Go to related glyphs using the Robofont > Glyph menu
 - Probably requires Robofont version 4.4b
 
-### What's New : Version 1.2
+### What's New : Version 1.3
 
- - menu is built better (no more placeholders!)
- - new menu icons
- - added "related glyphs" menu that lists
-   - components used in the current glyph
-   - glyphs that use this current glyph as a component ("dependents")
-   - glyphs that use the current glyph's components as a component ('family')
-   - each group separated by a line to help give some kind of order
+ - added event coalescing so you can mash the arrow keys a bunch of times to lazily get through a bunch of glyphs without having them be added to the history (see https://gist.github.com/okay-type/0922f38ce7268cda58bf915cdfb89b00 for reference)
+ - the timing for this a quick starting point: if you pause or mash too slowly some of the in between glyphs will be added. lmk if you think the timing should be adjusted
 
 ### Screenshots are nice
 
@@ -30,6 +25,16 @@
 - should this have a customizeable shortcut? I use ⇧+, because Fontlab ruined my brain. Young bucks might find ⇧+⌘+( more intuative.
 
 ### History
+
+**Version 1.2**
+
+ - menu is built better (no more placeholders!)
+ - new menu icons
+ - added "related glyphs" menu that lists:
+   - components used in the current glyph
+   - glyphs that use this current glyph as a component ("dependents")
+   - glyphs that use the current glyph's components as a component ('family')
+   - each group separated by a line to help give some kind of order
 
 **Version 1.1**
 

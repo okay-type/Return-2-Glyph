@@ -4,10 +4,16 @@ from mojo.subscriber import registerRoboFontSubscriber
 from mojo.UI import SetCurrentGlyphByName
 from lib.doodleMenus import BaseMenu
 
+from mojo.subscriber import registerSubscriberEvent, roboFontSubscriberEventRegistry
+from mojo.events import postEvent
+
 import AppKit
 from mojo.tools import CallbackWrapper
 
 
+# add button masher code so rapid <<<<<ing to a nearby glyph doesn't add the inbetweens to the history
+
+returnToLastGlyphKey  = 'okay.returnToLastGlyph'
 
 class returnToLastGlyph(Subscriber):
 
@@ -31,18 +37,13 @@ class returnToLastGlyph(Subscriber):
         if self.add_seperator == True:
             self.menu.removeItemAtIndex_(self.menu_insert_at_index)
 
-
-
     def glyphEditorDidSetGlyph(self, info):
         glyph = info['glyph']
         if glyph is None:
             return
-        if glyph.name != self.previous_glyphs[0]:
-            self.previous_glyphs.insert(0, glyph.name)
-            if len(self.previous_glyphs) > self.history_max:
-                self.previous_glyphs = self.previous_glyphs[:self.history_max]
-            self.related_glyphs = self.find_related(glyph)
-            self.updateMenuItem()
+        self.hold = True
+        postEvent(f'{returnToLastGlyphKey}.update_glyph_list_wait')
+        postEvent(f'{returnToLastGlyphKey}.update_glyph_list_go', glyphname=glyph.name)
 
     def glyphEditorDidKeyDown(self, info):
         deviceState = info['iterations'][0]['deviceState']
@@ -50,6 +51,28 @@ class returnToLastGlyph(Subscriber):
         shiftDown = deviceState['shiftDown']
         if keyDown == '<' and shiftDown != 0 and self.previous_glyphs[1] is not None:
             self.backGlyph()
+
+    def update_glyph_list_wait(self, sender):
+        self.hold = False
+        return
+
+    glyphname_cache = []
+
+    def update_glyph_list_go(self, notification):
+        for event in notification['lowLevelEvents']:
+            glyphname = event['glyphname']
+            glyph = event['glyph']
+            if glyphname is not None:
+                self.glyphname_cache.append(glyphname)
+        if self.hold is False:
+            glyphname = self.glyphname_cache[0]
+            if glyphname != self.previous_glyphs[0]:
+                self.previous_glyphs.insert(0, glyphname)
+                if len(self.previous_glyphs) > self.history_max:
+                    self.previous_glyphs = self.previous_glyphs[:self.history_max]
+                self.related_glyphs = self.find_related(glyph)
+                self.updateMenuItem()
+                self.glyphname_cache = []
 
     def backGlyph(self, sender=None):
         SetCurrentGlyphByName(self.previous_glyphs[1])
@@ -59,6 +82,7 @@ class returnToLastGlyph(Subscriber):
 
     def toFamilyMember(self, sender):
         SetCurrentGlyphByName(sender.title())
+
 
 
 
@@ -125,9 +149,6 @@ class returnToLastGlyph(Subscriber):
             shouldAddSeparatorItem=self.add_seperator
         )
 
-
-
-
     def updateMenuItem(self):
         if self.previous_glyphs[1] == None:
             return
@@ -180,7 +201,6 @@ class returnToLastGlyph(Subscriber):
         glyphMenu = menuBar.itemWithTitle_('Glyph')
         menu = glyphMenu.submenu()
         return menu
-
 
     # def glyphEditorDidKeyDown(self, info):
     #     print(info)
@@ -239,6 +259,23 @@ class returnToLastGlyph(Subscriber):
 
         return glyph_components + glyph_dependents + glyph_family
 
+
+if f'{returnToLastGlyphKey}.testDidIncrement' not in roboFontSubscriberEventRegistry:
+    registerSubscriberEvent(
+        subscriberEventName=f'{returnToLastGlyphKey}.update_glyph_list_go',
+        methodName='update_glyph_list_go',
+        lowLevelEventNames=[f'{returnToLastGlyphKey}.update_glyph_list_go'],
+        dispatcher='roboFont',
+        delay=1,
+    )
+if f'{returnToLastGlyphKey}.testHold' not in roboFontSubscriberEventRegistry:
+    registerSubscriberEvent(
+        subscriberEventName=f'{returnToLastGlyphKey}.update_glyph_list_wait',
+        methodName='update_glyph_list_wait',
+        lowLevelEventNames=[f'{returnToLastGlyphKey}.update_glyph_list_wait'],
+        dispatcher='roboFont',
+        delay=0.25,
+    )
 
 
 registerRoboFontSubscriber(returnToLastGlyph)
