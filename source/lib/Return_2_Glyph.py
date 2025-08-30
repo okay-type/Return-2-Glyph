@@ -22,7 +22,7 @@ class returnToLastGlyph(Subscriber):
     def build(self):
         self.menu = self.getMenu()
         self.menu_insert_at_index = 0
-        self.add_seperator = True
+        self.add_separator = True
         self.menu_len = 0
         self.history_max = 13  # the history submenu only uses this -2, ignoring CurrentGlyph and last glyph
         self.previous_glyphs = [None, None]
@@ -34,7 +34,7 @@ class returnToLastGlyph(Subscriber):
         for i in range(0, self.menu_len):
             self.menu.removeItemAtIndex_(self.menu_insert_at_index)
         # if shouldAddSeparatorItem=True , remove a third item
-        if self.add_seperator == True:
+        if self.add_separator == True:
             self.menu.removeItemAtIndex_(self.menu_insert_at_index)
 
     def glyphEditorDidSetGlyph(self, info):
@@ -42,6 +42,7 @@ class returnToLastGlyph(Subscriber):
         if glyph is None:
             return
         self.hold = True
+        # print('set glyph', glyph.name)
         postEvent(f'{returnToLastGlyphKey}.update_glyph_list_wait')
         postEvent(f'{returnToLastGlyphKey}.update_glyph_list_go', glyphname=glyph.name)
 
@@ -62,10 +63,13 @@ class returnToLastGlyph(Subscriber):
         for event in notification['lowLevelEvents']:
             glyphname = event['glyphname']
             glyph = event['glyph']
+            # print('update glyphname_cache', glyphname, '-------', self.glyphname_cache)
             if glyphname is not None:
-                self.glyphname_cache.append(glyphname)
+                # self.glyphname_cache.append(glyphname)
+                self.glyphname_cache.insert(0, glyphname)
         if self.hold is False:
             glyphname = self.glyphname_cache[0]
+            # print('update previous_glyphs', glyphname, '-------', self.previous_glyphs)
             if glyphname != self.previous_glyphs[0]:
                 self.previous_glyphs.insert(0, glyphname)
                 if len(self.previous_glyphs) > self.history_max:
@@ -75,6 +79,7 @@ class returnToLastGlyph(Subscriber):
                 self.glyphname_cache = []
 
     def backGlyph(self, sender=None):
+        # print('backGlyph', self.previous_glyphs[1])
         SetCurrentGlyphByName(self.previous_glyphs[1])
 
     def backGlyphHistory(self, sender):
@@ -146,16 +151,17 @@ class returnToLastGlyph(Subscriber):
             self.menu,
             menuItems,
             insert=self.menu_insert_at_index,
-            shouldAddSeparatorItem=self.add_seperator
+            shouldAddSeparatorItem=self.add_separator
         )
 
     def updateMenuItem(self):
+        # print('updateMenuItem self.previous_glyphs', self.previous_glyphs)
         if self.previous_glyphs[1] == None:
             return
 
         self.targets = []
 
-        if self.add_seperator == True:
+        if self.add_separator == True:
             menu_item_return_to = self.menu.itemAtIndex_(self.menu_insert_at_index+1)
             menu_item_history = self.menu.itemAtIndex_(self.menu_insert_at_index+2)
             menu_item_family = self.menu.itemAtIndex_(self.menu_insert_at_index+3)
@@ -204,8 +210,6 @@ class returnToLastGlyph(Subscriber):
 
     # def glyphEditorDidKeyDown(self, info):
     #     print(info)
-
-
 
     def find_related(self, g):
         if g == None:
@@ -260,15 +264,16 @@ class returnToLastGlyph(Subscriber):
         return glyph_components + glyph_dependents + glyph_family
 
 
-if f'{returnToLastGlyphKey}.testDidIncrement' not in roboFontSubscriberEventRegistry:
+if f'{returnToLastGlyphKey}.update_glyph_list_go' not in roboFontSubscriberEventRegistry:
     registerSubscriberEvent(
         subscriberEventName=f'{returnToLastGlyphKey}.update_glyph_list_go',
         methodName='update_glyph_list_go',
         lowLevelEventNames=[f'{returnToLastGlyphKey}.update_glyph_list_go'],
         dispatcher='roboFont',
-        delay=1,
+        delay=0.75,
     )
-if f'{returnToLastGlyphKey}.testHold' not in roboFontSubscriberEventRegistry:
+
+if f'{returnToLastGlyphKey}.update_glyph_list_wait' not in roboFontSubscriberEventRegistry:
     registerSubscriberEvent(
         subscriberEventName=f'{returnToLastGlyphKey}.update_glyph_list_wait',
         methodName='update_glyph_list_wait',

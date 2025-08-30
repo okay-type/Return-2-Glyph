@@ -5,6 +5,10 @@
 - Go to related glyphs using the Robofont > Glyph menu
 - Probably requires Robofont version 4.4b
 
+### What's New : Version 1.3.1
+
+ - dumb bug fix - idiot me pushed a broken version
+
 ### What's New : Version 1.3
 
  - added event coalescing so you can mash the arrow keys a bunch of times to lazily get through a bunch of glyphs without having them be added to the history (see https://gist.github.com/okay-type/0922f38ce7268cda58bf915cdfb89b00 for reference)
